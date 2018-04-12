@@ -6,9 +6,7 @@ namespace PushNotifications.Api.Client.Models
 {
     public class SendPushNotificationModel
     {
-        public SendPushNotificationModel(string subscriberUrn, string title, string body, string sound, string icon, int badge,
-            Dictionary<string, object> notificationData,
-            DateTime expiresAtUtc, bool contentAvailable)
+        public SendPushNotificationModel(string subscriberUrn, string title, string body, string sound, string icon, int badge, Dictionary<string, object> notificationData, DateTime expiresAtUtc, bool contentAvailable)
         {
             if (ReferenceEquals(subscriberUrn, null) == true) throw new ArgumentNullException(nameof(subscriberUrn));
             if (ReferenceEquals(expiresAtUtc, null) == true) throw new ArgumentNullException(nameof(expiresAtUtc));

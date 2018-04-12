@@ -1,5 +1,4 @@
-﻿using System.Runtime.Serialization;
-using System;
+﻿using System;
 using PushNotifications.Contracts.Subscriptions;
 
 namespace PushNotifications.Contracts

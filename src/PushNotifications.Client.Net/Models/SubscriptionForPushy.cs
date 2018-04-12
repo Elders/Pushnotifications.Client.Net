@@ -2,10 +2,6 @@
 
 namespace PushNotifications.Api.Client
 {
-    public interface IHaveUrn
-    {
-        string Urn { get; }
-    }
 
     public class SubscriptionForPushy
     {
