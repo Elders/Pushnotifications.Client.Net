@@ -50,6 +50,21 @@ namespace PushNotifications.Api.Client
             return restSharpIdentityModelClient.Execute<ResponseResult>(resource, Method.POST, pushNotification, authenticator);
         }
 
+        /// <summary>
+        /// Send a push notification to a given topic [Firebase]
+        /// </summary>
+        /// <param name="pushNotification"></param>
+        /// <param name="authenticator"></param>
+        /// <returns></returns>
+        public IRestResponse SendPushNotificationToTopic(SendPushNotificationToTopicModel pushNotification, Authenticator authenticator = null)
+        {
+            if (pushNotification is null) throw new ArgumentNullException(nameof(pushNotification));
+
+            const string resource = "PushNotifications/SendToTopic";
+
+            return restSharpIdentityModelClient.Execute<ResponseResult>(resource, Method.POST, pushNotification, authenticator);
+        }
+
         public IRestResponse SubscribeForFireBase(SubscriptionForFireBase subscription, Authenticator authenticator = null)
         {
             if (ReferenceEquals(null, subscription) == true) throw new ArgumentNullException(nameof(subscription));
@@ -57,6 +72,36 @@ namespace PushNotifications.Api.Client
             const string resource = "Subscriptions/FireBaseSubscription/Subscribe";
 
             return restSharpIdentityModelClient.Execute<ResponseResult>(resource, Method.POST, subscription, authenticator);
+        }
+
+        /// <summary>
+        /// Subscribe a given SubscriberId to a Topic [Firebase]
+        /// </summary>
+        /// <param name="topicSubscribeModel">Include two properties, SubscriberId:string, Topic:string</param>
+        /// <param name="authenticator"></param>
+        /// <returns></returns>
+        public IRestResponse SubscribeToTopicForFireBase(FireBaseTopicSubscribeModel topicSubscribeModel, Authenticator authenticator = null)
+        {
+            if (topicSubscribeModel is null) throw new ArgumentNullException(nameof(topicSubscribeModel));
+
+            const string resource = "Subscriptions/FireBaseSubscription/SubscribeToTopic";
+
+            return restSharpIdentityModelClient.Execute<ResponseResult>(resource, Method.POST, topicSubscribeModel, authenticator);
+        }
+
+        /// <summary>
+        /// Unsubscribe a given SubscriberId from a Topic [Firebase]
+        /// </summary>
+        /// <param name="topicSubscribeModel">Include two properties, SubscriberId:string, Topic:string</param>
+        /// <param name="authenticator"></param>
+        /// <returns></returns>
+        public IRestResponse UnsubscribeFromTopicForFireBase(FireBaseTopicSubscribeModel topicSubscribeModel, Authenticator authenticator = null)
+        {
+            if (topicSubscribeModel is null) throw new ArgumentNullException(nameof(topicSubscribeModel));
+
+            const string resource = "Subscriptions/FireBaseSubscription/UnsubscribeFromTopic";
+
+            return restSharpIdentityModelClient.Execute<ResponseResult>(resource, Method.POST, topicSubscribeModel, authenticator);
         }
 
         public IRestResponse SubscribeForPushy(SubscriptionForPushy subscription, Authenticator authenticator = null)
@@ -75,6 +120,36 @@ namespace PushNotifications.Api.Client
             const string resource = "Subscriptions/FireBaseSubscription/UnSubscribe";
 
             return restSharpIdentityModelClient.Execute<ResponseResult>(resource, Method.POST, subscription, authenticator);
+        }
+
+        /// <summary>
+        /// Subscribe a given SubscriberId to a Topic [Pushy]
+        /// </summary>
+        /// <param name="topicSubscribeModel">Include two properties, SubscriberId:string, Topic:string</param>
+        /// <param name="authenticator"></param>
+        /// <returns></returns>
+        public IRestResponse SubscribeToTopicForPushy(PushyTopicSubscribeModel topicSubscribeModel, Authenticator authenticator = null)
+        {
+            if (topicSubscribeModel is null) throw new ArgumentNullException(nameof(topicSubscribeModel));
+
+            const string resource = "Subscriptions/PushySubscription/SubscribeToTopic";
+
+            return restSharpIdentityModelClient.Execute<ResponseResult>(resource, Method.POST, topicSubscribeModel, authenticator);
+        }
+
+        /// <summary>
+        /// Unsubscribe a given SubscriberId to a Topic [Pushy]
+        /// </summary>
+        /// <param name="topicSubscribeModel">Include two properties, SubscriberId:string, Topic:string</param>
+        /// <param name="authenticator"></param>
+        /// <returns></returns>
+        public IRestResponse UnsubscribeFromTopicForPushy(PushyTopicSubscribeModel topicSubscribeModel, Authenticator authenticator = null)
+        {
+            if (topicSubscribeModel is null) throw new ArgumentNullException(nameof(topicSubscribeModel));
+
+            const string resource = "Subscriptions/PushySubscription/UnsubscribeFromTopic";
+
+            return restSharpIdentityModelClient.Execute<ResponseResult>(resource, Method.POST, topicSubscribeModel, authenticator);
         }
 
         public IRestResponse UnSubscribeForPushy(SubscriptionForPushy subscription, Authenticator authenticator = null)
