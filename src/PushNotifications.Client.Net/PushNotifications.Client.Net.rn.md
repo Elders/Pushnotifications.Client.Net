@@ -1,3 +1,7 @@
+#### 4.1.0 - 25.07.2018
+* Adds endpoints for topic subscription
+* Adds endpoints for sending push notifications to a topic
+
 #### 4.0.0 - 13.04.2018
 * Moved to a separate repository
 
