@@ -1,3 +1,6 @@
+#### 5.0.0 - 26.07.2018
+* Changes the public interface for the topic subscription
+
 #### 4.1.0 - 25.07.2018
 * Adds endpoints for topic subscription
 * Adds endpoints for sending push notifications to a topic
