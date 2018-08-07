@@ -131,6 +131,18 @@ namespace PushNotifications.Api.Client
             return restSharpIdentityModelClient.Execute<ResponseResult>(resource, Method.POST, subscription, authenticator);
         }
 
+        public IRestResponse GetTopicSubscribedCount(TopicSubscriptionCountModel topicSubscriptionCountModel, Authenticator authenticator = null)
+        {
+            if (ReferenceEquals(null, topicSubscriptionCountModel) == true) throw new ArgumentNullException(nameof(topicSubscriptionCountModel));
+
+            const string resource = "TopicSubscriptionCount/GetTopicSubscribedCount";
+
+            var request = new RestRequest(resource, Method.GET);
+            request.AddQueryParameter("name", topicSubscriptionCountModel.Name);
+
+            return restSharpIdentityModelClient.Execute<ResponseResult>(request);
+        }
+
         public IRestResponse<ResponseResult<DiscoveryReaderResponseModel>> Discovery(Authenticator authenticator = null)
         {
             const string resource = "Discovery/Normalized";
@@ -146,6 +158,10 @@ namespace PushNotifications.Api.Client
         }
     }
 
+    public class TopicSubscriptionCountModel
+    {
+        public string Name { get; set; }
+    }
 
     public class SubscriberTokensModel
     {

@@ -1,3 +1,6 @@
+#### 5.0.1 - 07.08.2018
+* Adds endpoint to get topic subscription count
+
 #### 5.0.0 - 26.07.2018
 * Changes the public interface for the topic subscription
 
