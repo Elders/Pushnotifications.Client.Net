@@ -1,3 +1,6 @@
+#### 5.0.2 - 07.08.2018
+* Fixes TopicSubscribeModel
+
 #### 5.0.1 - 07.08.2018
 * Adds endpoint to get topic subscription count
 
