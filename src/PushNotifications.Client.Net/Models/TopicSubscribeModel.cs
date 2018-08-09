@@ -10,11 +10,11 @@ namespace PushNotifications.Api.Client
             if (string.IsNullOrEmpty(topic) == true) throw new ArgumentNullException(nameof(topic));
 
             SubscriberId = subscriberId;
-            Token = topic;
+            Topic = topic;
         }
 
         public string SubscriberId { get; private set; }
 
-        public string Token { get; private set; }
+        public string Topic { get; private set; }
     }
 }
