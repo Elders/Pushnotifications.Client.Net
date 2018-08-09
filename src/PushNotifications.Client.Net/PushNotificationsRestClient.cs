@@ -24,7 +24,6 @@ namespace PushNotifications.Api.Client
 
             var authenticatorClientOptions = Authenticator.Options.UseClientCredentials(authority, clientId, clientSecret, scope, authorizationEndpointRelativePath);
             var authenticator = new Authenticator(authenticatorClientOptions);
-            var clientCredentialsAuthenticator = authenticator.GetClientCredentialsAuthenticatorAsync().Result;
 
             var serializerSettings = SerializerFactory.DefaultSettings();
             var converters = typeof(PushNotificationsConvertersAssembly).Assembly.GetTypes()
@@ -38,7 +37,7 @@ namespace PushNotifications.Api.Client
             var localSerializer = new NewtonsoftJsonSerializer(Newtonsoft.Json.JsonSerializer.Create(serializerSettings));
             var restSharpIdentityModelClientOptions = new RestSharpIdentityModelClient.Options(apiAddress, localSerializer);
 
-            restSharpIdentityModelClient = new RestSharpIdentityModelClient(restSharpIdentityModelClientOptions, clientCredentialsAuthenticator);
+            restSharpIdentityModelClient = new RestSharpIdentityModelClient(restSharpIdentityModelClientOptions, authenticator);
         }
 
         public IRestResponse SendPushNotification(SendPushNotificationModel pushNotification, Authenticator authenticator = null)
