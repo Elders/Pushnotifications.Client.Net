@@ -130,7 +130,7 @@ namespace PushNotifications.Api.Client
             return restSharpIdentityModelClient.Execute<ResponseResult>(resource, Method.POST, subscription, authenticator);
         }
 
-        public IRestResponse GetTopicSubscribedCount(TopicSubscriptionCountModel topicSubscriptionCountModel, Authenticator authenticator = null)
+        public IRestResponse<ResponseResult<StatCount>> GetTopicSubscribedCount(TopicSubscriptionCountModel topicSubscriptionCountModel, Authenticator authenticator = null)
         {
             if (ReferenceEquals(null, topicSubscriptionCountModel) == true) throw new ArgumentNullException(nameof(topicSubscriptionCountModel));
 
@@ -139,7 +139,7 @@ namespace PushNotifications.Api.Client
             var request = new RestRequest(resource, Method.GET);
             request.AddQueryParameter("name", topicSubscriptionCountModel.Name);
 
-            return restSharpIdentityModelClient.Execute<ResponseResult>(request);
+            return restSharpIdentityModelClient.Execute<ResponseResult<StatCount>>(request);
         }
 
         public IRestResponse<ResponseResult<DiscoveryReaderResponseModel>> Discovery(Authenticator authenticator = null)
@@ -155,6 +155,13 @@ namespace PushNotifications.Api.Client
 
             return restSharpIdentityModelClient.ExecuteGet<ResponseResult<SubscriberTokens>>(resource, model, new List<Parameter>(), authenticator);
         }
+    }
+
+    public class StatCount
+    {
+        public long Count { get; set; }
+
+        public string Name { get; set; }
     }
 
     public class TopicSubscriptionCountModel
