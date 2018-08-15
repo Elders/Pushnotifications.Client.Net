@@ -1,3 +1,6 @@
+#### 5.0.3 - 15.08.2018
+* Returns IRestResponse for the topic subscription count
+
 #### 5.0.2 - 07.08.2018
 * Fixes TopicSubscribeModel
 
