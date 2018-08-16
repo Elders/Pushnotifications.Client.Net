@@ -1,43 +1,33 @@
 ﻿using System;
 using PushNotifications.Api.Client.Models;
-using PushNotifications.Converters;
 using RestSharp;
-using System.Linq;
-using Newtonsoft.Json;
 using Discovery.Contracts;
-using PushNotifications.Contracts;
-using System.Collections.Generic;
 
 namespace PushNotifications.Api.Client
 {
-    public class PushNotificationsRestClient
+    public partial class PushNotificationsRestClient
     {
-        readonly RestSharpIdentityModelClient restSharpIdentityModelClient;
+        Options options;
+        Authenticator authenticator;
 
-        public PushNotificationsRestClient(Uri authority, string authorizationEndpointRelativePath, string clientId, string clientSecret, string scope, Uri apiAddress)
+        public PushNotificationsRestClient(Options options, Authenticator authenticator = null)
         {
-            if (ReferenceEquals(authority, null) == true) throw new ArgumentNullException(nameof(authority));
-            if (string.IsNullOrEmpty(authorizationEndpointRelativePath) == true) throw new ArgumentNullException(nameof(authorizationEndpointRelativePath));
-            if (string.IsNullOrEmpty(clientId) == true) throw new ArgumentNullException(nameof(clientId));
-            if (string.IsNullOrEmpty(clientSecret) == true) throw new ArgumentNullException(nameof(clientSecret));
-            if (ReferenceEquals(apiAddress, null) == true) throw new ArgumentNullException(nameof(apiAddress));
+            if (ReferenceEquals(null, options)) throw new ArgumentNullException(nameof(options));
+            this.options = options;
 
-            var authenticatorClientOptions = Authenticator.Options.UseClientCredentials(authority, clientId, clientSecret, scope, authorizationEndpointRelativePath);
-            var authenticator = new Authenticator(authenticatorClientOptions);
+            this.authenticator = authenticator;
+        }
 
-            var serializerSettings = SerializerFactory.DefaultSettings();
-            var converters = typeof(PushNotificationsConvertersAssembly).Assembly.GetTypes()
-                .Where(x => typeof(JsonConverter).IsAssignableFrom(x) && x.IsAbstract == false);
-
-            foreach (var item in converters)
+        public sealed class Options
+        {
+            public Options(Uri apiAddress)
             {
-                serializerSettings.Converters.Add(Activator.CreateInstance(item) as JsonConverter);
+                ApiAddress = apiAddress;
+                JsonSerializer = NewtonsoftJsonSerializer.Default();
             }
 
-            var localSerializer = new NewtonsoftJsonSerializer(Newtonsoft.Json.JsonSerializer.Create(serializerSettings));
-            var restSharpIdentityModelClientOptions = new RestSharpIdentityModelClient.Options(apiAddress, localSerializer);
-
-            restSharpIdentityModelClient = new RestSharpIdentityModelClient(restSharpIdentityModelClientOptions, authenticator);
+            public Uri ApiAddress { get; private set; }
+            public IJsonSerializer JsonSerializer { get; private set; }
         }
 
         public IRestResponse SendPushNotification(SendPushNotificationModel pushNotification, Authenticator authenticator = null)
@@ -46,7 +36,12 @@ namespace PushNotifications.Api.Client
 
             const string resource = "PushNotifications/Send";
 
-            return restSharpIdentityModelClient.Execute<ResponseResult>(resource, Method.POST, pushNotification, authenticator);
+            var request = CreateRestRequest(resource, Method.POST, authenticator)
+                .AddJsonBody(pushNotification);
+
+            var response = CreateRestClient().Execute<ResponseResult>(request);
+
+            return response;
         }
 
         /// <summary>
@@ -61,7 +56,11 @@ namespace PushNotifications.Api.Client
 
             const string resource = "PushNotifications/SendToTopic";
 
-            return restSharpIdentityModelClient.Execute<ResponseResult>(resource, Method.POST, pushNotification, authenticator);
+            var request = CreateRestRequest(resource, Method.POST, authenticator)
+                .AddJsonBody(pushNotification);
+
+            var response = CreateRestClient().Execute<ResponseResult>(request);
+            return response;
         }
 
         public IRestResponse SubscribeForFireBase(SubscriptionForFireBase subscription, Authenticator authenticator = null)
@@ -70,7 +69,12 @@ namespace PushNotifications.Api.Client
 
             const string resource = "Subscriptions/FireBaseSubscription/Subscribe";
 
-            return restSharpIdentityModelClient.Execute<ResponseResult>(resource, Method.POST, subscription, authenticator);
+            var request = CreateRestRequest(resource, Method.POST, authenticator)
+                .AddJsonBody(subscription);
+
+            var response = CreateRestClient().Execute<ResponseResult>(request);
+
+            return response;
         }
 
         /// <summary>
@@ -85,7 +89,12 @@ namespace PushNotifications.Api.Client
 
             const string resource = "Subscriptions/SubscribeToTopic";
 
-            return restSharpIdentityModelClient.Execute<ResponseResult>(resource, Method.POST, topicSubscribeModel, authenticator);
+            var request = CreateRestRequest(resource, Method.POST, authenticator)
+                .AddJsonBody(topicSubscribeModel);
+
+            var response = CreateRestClient().Execute<ResponseResult>(request);
+
+            return response;
         }
 
         /// <summary>
@@ -100,7 +109,12 @@ namespace PushNotifications.Api.Client
 
             const string resource = "Subscriptions/UnsubscribeFromTopic";
 
-            return restSharpIdentityModelClient.Execute<ResponseResult>(resource, Method.POST, topicSubscribeModel, authenticator);
+            var request = CreateRestRequest(resource, Method.POST, authenticator)
+                .AddJsonBody(topicSubscribeModel);
+
+            var response = CreateRestClient().Execute<ResponseResult>(request);
+
+            return response;
         }
 
         public IRestResponse SubscribeForPushy(SubscriptionForPushy subscription, Authenticator authenticator = null)
@@ -109,7 +123,12 @@ namespace PushNotifications.Api.Client
 
             const string resource = "Subscriptions/PushySubscription/Subscribe";
 
-            return restSharpIdentityModelClient.Execute<ResponseResult>(resource, Method.POST, subscription, authenticator);
+            var request = CreateRestRequest(resource, Method.POST, authenticator)
+                .AddJsonBody(subscription);
+
+            var response = CreateRestClient().Execute<ResponseResult>(request);
+
+            return response;
         }
 
         public IRestResponse UnSubscribeForFireBase(SubscriptionForFireBase subscription, Authenticator authenticator = null)
@@ -118,7 +137,12 @@ namespace PushNotifications.Api.Client
 
             const string resource = "Subscriptions/FireBaseSubscription/UnSubscribe";
 
-            return restSharpIdentityModelClient.Execute<ResponseResult>(resource, Method.POST, subscription, authenticator);
+            var request = CreateRestRequest(resource, Method.POST, authenticator)
+                .AddJsonBody(subscription);
+
+            var response = CreateRestClient().Execute<ResponseResult>(request);
+
+            return response;
         }
 
         public IRestResponse UnSubscribeForPushy(SubscriptionForPushy subscription, Authenticator authenticator = null)
@@ -127,7 +151,12 @@ namespace PushNotifications.Api.Client
 
             const string resource = "Subscriptions/PushySubscription/UnSubscribe";
 
-            return restSharpIdentityModelClient.Execute<ResponseResult>(resource, Method.POST, subscription, authenticator);
+            var request = CreateRestRequest(resource, Method.POST, authenticator)
+                .AddJsonBody(subscription);
+
+            var response = CreateRestClient().Execute<ResponseResult>(request);
+
+            return response;
         }
 
         public IRestResponse<ResponseResult<StatCount>> GetTopicSubscribedCount(TopicSubscriptionCountModel topicSubscriptionCountModel, Authenticator authenticator = null)
@@ -136,58 +165,35 @@ namespace PushNotifications.Api.Client
 
             const string resource = "TopicSubscriptionCount/GetTopicSubscribedCount";
 
-            var request = new RestRequest(resource, Method.GET);
+            var request = CreateRestRequest(resource, Method.GET, authenticator);
             request.AddQueryParameter("name", topicSubscriptionCountModel.Name);
 
-            return restSharpIdentityModelClient.Execute<ResponseResult<StatCount>>(request);
+            var response = CreateRestClient().Execute<ResponseResult<StatCount>>(request);
+
+            return response;
         }
 
         public IRestResponse<ResponseResult<DiscoveryReaderResponseModel>> Discovery(Authenticator authenticator = null)
         {
             const string resource = "Discovery/Normalized";
 
-            return restSharpIdentityModelClient.Execute<ResponseResult<DiscoveryReaderResponseModel>>(resource, Method.GET, authenticator);
+            var request = CreateRestRequest(resource, Method.GET, authenticator);
+
+            var response = CreateRestClient().Execute<ResponseResult<DiscoveryReaderResponseModel>>(request);
+
+            return response;
         }
 
         public IRestResponse<ResponseResult<SubscriberTokens>> GetSubscriberTokens(SubscriberTokensModel model, Authenticator authenticator = null)
         {
             const string resource = "Subscriptions/SubscriberTokens";
 
-            return restSharpIdentityModelClient.ExecuteGet<ResponseResult<SubscriberTokens>>(resource, model, new List<Parameter>(), authenticator);
+            var request = CreateRestRequest(resource, Method.GET, authenticator);
+            request.AddQueryParameter("subscriberUrn", model.SubscriberUrn);
+
+            var response = CreateRestClient().Execute<ResponseResult<SubscriberTokens>>(request);
+
+            return response;
         }
-    }
-
-    public class StatCount
-    {
-        public long Count { get; set; }
-
-        public string Name { get; set; }
-    }
-
-    public class TopicSubscriptionCountModel
-    {
-        public string Name { get; set; }
-    }
-
-    public class SubscriberTokensModel
-    {
-        public SubscriberTokensModel(string subscriberUrn)
-        {
-            SubscriberUrn = subscriberUrn;
-        }
-
-        public string SubscriberUrn { get; private set; }
-    }
-
-    public class SubscriberTokens
-    {
-        public SubscriberTokens()
-        {
-            Tokens = new HashSet<SubscriptionToken>();
-        }
-
-        public SubscriberId SubscriberId { get; set; }
-
-        public HashSet<SubscriptionToken> Tokens { get; set; }
     }
 }
