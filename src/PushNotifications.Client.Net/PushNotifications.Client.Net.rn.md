@@ -1,3 +1,7 @@
+#### 5.0.4 - 16.08.2018
+* Changes the way we build the client
+* General re-structuring
+
 #### 5.0.3 - 15.08.2018
 * Returns IRestResponse for the topic subscription count
 
