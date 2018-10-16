@@ -24,7 +24,7 @@
         <Reference Include="System.Core" />
         <Reference Include="Microsoft.CSharp" />
         <PackageReference Include="LibLog" Version="4.2.6" />
-        <PackageReference Include="Discovery" Version="0.2.0" />
+        <PackageReference Include="Discovery" Version="0.2.5" />
         <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
         <PackageReference Include="RestSharp.IdentityModel.Extensions" Version="1.0.3" />
     </ItemGroup>
