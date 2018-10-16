@@ -1,3 +1,6 @@
+#### 5.0.5 - 16.10.2018
+* Updates Discovery packages
+
 #### 5.0.4 - 16.08.2018
 * Changes the way we build the client
 * General re-structuring
