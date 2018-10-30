@@ -1,31 +1,28 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-        <TargetFrameworks>net461</TargetFrameworks>
-    </PropertyGroup>
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+  </PropertyGroup>
 
-    <!--Nuget-->
-    <PropertyGroup>
-        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-        <PackageId>Pushnotifications.Client.Net</PackageId>
-        <RepositoryType>Framework</RepositoryType>
-        <Authors>Elders</Authors>
-        <ApplicationIcon />
-        <OutputType>Library</OutputType>
-        <StartupObject></StartupObject>
-    </PropertyGroup>
+  <!--Nuget-->
+  <PropertyGroup>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <PackageId>Pushnotifications.Client.Net</PackageId>
+    <RepositoryType>Framework</RepositoryType>
+    <Authors>Elders</Authors>
+    <ApplicationIcon />
+    <OutputType>Library</OutputType>
+    <StartupObject></StartupObject>
+  </PropertyGroup>
 
-    <!--net461-->
-    <PropertyGroup Condition="'$(TargetFramework)'=='net461'">
-        <DefineConstants>TRACE;DEBUG;LIBLOG_PORTABLE</DefineConstants>
-    </PropertyGroup>
-    <ItemGroup Condition="'$(TargetFramework)'=='net461'">
-        <Reference Include="mscorlib" />
-        <Reference Include="System" />
-        <Reference Include="System.Core" />
-        <Reference Include="Microsoft.CSharp" />
-        <PackageReference Include="LibLog" Version="4.2.6" />
-        <PackageReference Include="Discovery" Version="0.2.5" />
-        <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
-        <PackageReference Include="RestSharp.IdentityModel.Extensions" Version="1.0.3" />
-    </ItemGroup>
+  <!--netstandard2.0-->
+  <PropertyGroup>
+    <DefineConstants>TRACE;DEBUG;LIBLOG_PORTABLE</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <PackageReference Include="LibLog" Version="5.0.2" />
+    <PackageReference Include="Discovery" Version="0.2.5" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="RestSharp.IdentityModel.Extensions" Version="1.0.3" />
+  </ItemGroup>
 </Project>
