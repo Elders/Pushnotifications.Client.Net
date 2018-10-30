@@ -1,3 +1,6 @@
+#### 5.0.6 - 30.10.2018
+* Targets NetStandard2.0
+
 #### 5.0.5 - 16.10.2018
 * Updates Discovery packages
 
