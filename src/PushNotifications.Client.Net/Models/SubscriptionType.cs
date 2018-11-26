@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PushNotifications.Contracts.Subscriptions
+namespace PushNotifications.Client.Net
 {
     public class SubscriptionType
     {

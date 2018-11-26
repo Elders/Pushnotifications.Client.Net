@@ -1,4 +1,4 @@
-﻿namespace PushNotifications.Converters
+﻿namespace PushNotifications.Client.Net
 {
     public class PushNotificationsConvertersAssembly { }
 }

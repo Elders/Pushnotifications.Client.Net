@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using PushNotifications.Contracts;
 
-namespace PushNotifications.Api.Client.Models
+namespace PushNotifications.Client.Net
 {
     public class SendPushNotificationToTopicModel
     {

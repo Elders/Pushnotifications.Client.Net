@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PushNotifications.Contracts
+namespace PushNotifications.Client.Net
 {
     public class Timestamp
     {

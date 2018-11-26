@@ -1,7 +1,7 @@
 ﻿using PushNotifications.Api.Client;
 using System;
 
-namespace PushNotifications.Contracts
+namespace PushNotifications.Client.Net
 {
     public class SubscriberId : IHaveUrn
     {

@@ -1,7 +1,6 @@
 ﻿using System;
-using PushNotifications.Contracts.Subscriptions;
 
-namespace PushNotifications.Contracts
+namespace PushNotifications.Client.Net
 {
     public class SubscriptionToken
     {

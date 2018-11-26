@@ -2,9 +2,8 @@
 using System.Linq;
 using System.Reflection;
 using PushNotifications.Api.Client;
-using PushNotifications.Contracts.Subscriptions;
 
-namespace PushNotifications.Converters
+namespace PushNotifications.Client.Net
 {
     public class SubscriptionTypeConverter : GenericJsonConverter<string, SubscriptionType>
     {

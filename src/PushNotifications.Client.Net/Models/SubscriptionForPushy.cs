@@ -1,8 +1,7 @@
 ﻿using System;
 
-namespace PushNotifications.Api.Client
+namespace PushNotifications.Client.Net
 {
-
     public class SubscriptionForPushy
     {
         public SubscriptionForPushy(string subscriberUrn, string token)

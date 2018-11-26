@@ -1,31 +1,37 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-        <TargetFrameworks>net461</TargetFrameworks>
-    </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
 
-    <!--Nuget-->
-    <PropertyGroup>
-        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-        <PackageId>Pushnotifications.Client.Net</PackageId>
-        <RepositoryType>Framework</RepositoryType>
-        <Authors>Elders</Authors>
-        <ApplicationIcon />
-        <OutputType>Library</OutputType>
-        <StartupObject></StartupObject>
-    </PropertyGroup>
+  <!--Nuget-->
+  <PropertyGroup>
+    <PackageId>Pushnotifications.Client.Net</PackageId>
+    <Product>Pushnotifications.Client.Net</Product>
+    <Title>Pushnotifications.Client.Net</Title>
+    <Authors>Elders OSS</Authors>
+    <Copyright>Copyright © Elders OSS 2013</Copyright>
+    <Description>Pushnotifications.Client.Net</Description>
+    <PackageLicenseUrl>https://github.com/Elders/Pushnotifications.Client.Net/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/Elders/Pushnotifications.Client.Net</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Elders/Pushnotifications.Client.Net.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AssemblyName>PushNotifications.Client.Net</AssemblyName>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <RootNamespace>PushNotifications.Client.Net</RootNamespace>
+  </PropertyGroup>
 
-    <!--net461-->
-    <PropertyGroup Condition="'$(TargetFramework)'=='net461'">
-        <DefineConstants>TRACE;DEBUG;LIBLOG_PORTABLE</DefineConstants>
-    </PropertyGroup>
-    <ItemGroup Condition="'$(TargetFramework)'=='net461'">
-        <Reference Include="mscorlib" />
-        <Reference Include="System" />
-        <Reference Include="System.Core" />
-        <Reference Include="Microsoft.CSharp" />
-        <PackageReference Include="LibLog" Version="4.2.6" />
-        <PackageReference Include="Discovery" Version="0.2.0" />
-        <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
-        <PackageReference Include="RestSharp.IdentityModel.Extensions" Version="1.0.3" />
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="LibLog" Version="5.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.1.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
+    <PackageReference Include="RestSharp" Version="106.3.1" />
+    <PackageReference Include="IdentityModel" Version="3.10.2" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
+  </ItemGroup>
 </Project>
