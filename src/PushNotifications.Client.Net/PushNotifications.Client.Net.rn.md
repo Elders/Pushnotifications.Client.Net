@@ -1,3 +1,6 @@
+#### 5.1.2 - 26.11.2018
+* Removes RestSharpIdentityModelExtensions
+
 #### 5.0.2 - 07.08.2018
 * Fixes TopicSubscribeModel
 
