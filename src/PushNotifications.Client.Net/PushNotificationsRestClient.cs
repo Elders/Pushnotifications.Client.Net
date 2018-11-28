@@ -133,7 +133,7 @@ namespace PushNotifications.Client.Net
 
             const string resource = "TopicSubscriptionCount/GetTopicSubscribedCount";
 
-            var request = CreateRestRequest(resource, Method.POST)
+            var request = CreateRestRequest(resource, Method.GET)
                 .AddJsonBody(topicSubscriptionCountModel);
 
             var response = CreateRestClient().ExecuteWithLog<ResponseResult<SubscriberTokens>>(request);
@@ -146,7 +146,7 @@ namespace PushNotifications.Client.Net
 
             const string resource = "Subscriptions/SubscriberTokens";
 
-            var request = CreateRestRequest(resource, Method.POST)
+            var request = CreateRestRequest(resource, Method.GET)
                 .AddJsonBody(model);
 
             var response = CreateRestClient().ExecuteWithLog<ResponseResult<SubscriberTokens>>(request);
