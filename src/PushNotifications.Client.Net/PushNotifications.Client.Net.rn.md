@@ -1,3 +1,6 @@
+#### 5.1.0-beta0002 - 27.11.2018
+* Fixes API calls to have the correct verb
+
 #### 5.1.0-beta0001 - 26.11.2018
 * Removes RestSharpIdentityModelExtensions
 
