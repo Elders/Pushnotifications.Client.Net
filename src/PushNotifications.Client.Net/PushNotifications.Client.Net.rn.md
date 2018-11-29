@@ -1,3 +1,6 @@
+#### 5.1.0-beta0004 - 30.11.2018
+* Error logging
+
 #### 5.1.0-beta0003 - 28.11.2018
 * Fixes API calls to have the correct parameters
 
