@@ -28,6 +28,11 @@ namespace PushNotifications.Client.Net
                 log.Info($"Request finished {request.Method} `{client.BaseUrl}{request.Resource}` finished in {elapsed.TotalMilliseconds}ms - {response.StatusCode}");
             }
 
+            if (response.IsSuccessful == false)
+            {
+                log.Error(response.ErrorException, $"Request failed {request.Method} `{client.BaseUrl}{request.Resource}` - {response.StatusCode} {Environment.NewLine} {response.ErrorMessage} {Environment.NewLine} {response.Content}");
+            }
+
             return response;
         }
         public static IRestRequest AddAuthorizationBearerHeader(this IRestRequest request, Authenticator auth)
