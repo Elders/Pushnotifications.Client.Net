@@ -1,5 +1,4 @@
-﻿using RestSharp;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -25,53 +24,6 @@ namespace PushNotifications.Client.Net
         public HttpStatusCode StatusCode { get; set; }
 
         public bool IsSuccess { get { return HasNoErrors() && HttpCodeIsOk(); } }
-
-
-        internal static ResponseResult FromRestResponse(IRestResponse<ResponseResult> response)
-        {
-            var result = new ResponseResult();
-
-            if (ResponseIsPresent(response) && ResponseDataIsPresent(response.Data))
-                result = response.Data;
-
-            result.StatusCode = response.StatusCode;
-
-            return result;
-        }
-
-        internal static ResponseResult<T> FromRestResponse<T>(IRestResponse<ResponseResult<T>> response)
-        {
-            var result = new ResponseResult<T>();
-
-            if (ResponseIsPresent<T>(response) && ResponseDataIsPresent<T>(response.Data))
-                result = response.Data;
-
-            result.StatusCode = response.StatusCode;
-
-            return result;
-        }
-
-
-        private static bool ResponseDataIsPresent<T>(ResponseResult<T> data)
-        {
-            return ReferenceEquals(data, null) == false;
-        }
-
-        private static bool ResponseDataIsPresent(ResponseResult data)
-        {
-            return ReferenceEquals(data, null) == false;
-        }
-
-        private static bool ResponseIsPresent<T>(IRestResponse<ResponseResult<T>> response)
-        {
-            return ReferenceEquals(response, null) == false;
-        }
-
-        private static bool ResponseIsPresent(IRestResponse<ResponseResult> response)
-        {
-            return ReferenceEquals(response, null) == false;
-        }
-
 
         private bool HttpCodeIsOk()
         {

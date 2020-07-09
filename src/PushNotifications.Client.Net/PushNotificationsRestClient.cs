@@ -1,21 +1,35 @@
-﻿using System;
-using RestSharp;
+﻿using Newtonsoft.Json;
+using System;
+using System.Net.Http;
+using System.Text;
+using System.Web;
 
 namespace PushNotifications.Client.Net
 {
-    public partial class PushNotificationsClient
+    public partial class PushNotificationsHttpClient
     {
+        private readonly HttpClient _httpClient;
+
+        public PushNotificationsHttpClient(HttpClient httpClient)
+        {
+            _httpClient = httpClient;
+        }
+
         public ResponseResult SendPushNotification(SendPushNotificationModel pushNotification)
         {
             if (pushNotification is null) throw new ArgumentNullException(nameof(pushNotification));
 
             const string resource = "PushNotifications/Send";
 
-            var request = CreateRestRequest(resource, Method.POST)
-                .AddJsonBody(pushNotification);
+            var requesBody = new StringContent(JsonConvert.SerializeObject(pushNotification), Encoding.UTF8, "application/json");
 
-            var response = CreateRestClient().ExecuteWithLog<ResponseResult>(request);
-            return ResponseResult.FromRestResponse(response);
+            var response = _httpClient.PostAsync(resource, requesBody).Result;
+
+            if (response.IsSuccessStatusCode == false)
+                return ResponseResult.Success;
+
+            string content = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            return JsonConvert.DeserializeObject<ResponseResult>(content);
         }
 
         /// <summary>
@@ -30,11 +44,15 @@ namespace PushNotifications.Client.Net
 
             const string resource = "PushNotifications/SendToTopic";
 
-            var request = CreateRestRequest(resource, Method.POST)
-                .AddJsonBody(pushNotification);
+            var requesBody = new StringContent(JsonConvert.SerializeObject(pushNotification), Encoding.UTF8, "application/json");
 
-            var response = CreateRestClient().ExecuteWithLog<ResponseResult>(request);
-            return ResponseResult.FromRestResponse(response);
+            var response = _httpClient.PostAsync(resource, requesBody).Result;
+
+            if (response.IsSuccessStatusCode == false)
+                return ResponseResult.Success;
+
+            string content = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            return JsonConvert.DeserializeObject<ResponseResult>(content);
         }
 
         public ResponseResult SubscribeForFireBase(SubscriptionForFireBase subscription)
@@ -43,11 +61,15 @@ namespace PushNotifications.Client.Net
 
             const string resource = "Subscriptions/FireBaseSubscription/Subscribe";
 
-            var request = CreateRestRequest(resource, Method.POST)
-                .AddJsonBody(subscription);
+            var requesBody = new StringContent(JsonConvert.SerializeObject(subscription), Encoding.UTF8, "application/json");
 
-            var response = CreateRestClient().ExecuteWithLog<ResponseResult>(request);
-            return ResponseResult.FromRestResponse(response);
+            var response = _httpClient.PostAsync(resource, requesBody).Result;
+
+            if (response.IsSuccessStatusCode == false)
+                return ResponseResult.Success;
+
+            string content = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            return JsonConvert.DeserializeObject<ResponseResult>(content);
         }
 
         /// <summary>
@@ -62,11 +84,15 @@ namespace PushNotifications.Client.Net
 
             const string resource = "Subscriptions/SubscribeToTopic";
 
-            var request = CreateRestRequest(resource, Method.POST)
-                .AddJsonBody(topicSubscribeModel);
+            var requesBody = new StringContent(JsonConvert.SerializeObject(topicSubscribeModel), Encoding.UTF8, "application/json");
 
-            var response = CreateRestClient().ExecuteWithLog<ResponseResult>(request);
-            return ResponseResult.FromRestResponse(response);
+            var response = _httpClient.PostAsync(resource, requesBody).Result;
+
+            if (response.IsSuccessStatusCode == false)
+                return ResponseResult.Success;
+
+            string content = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            return JsonConvert.DeserializeObject<ResponseResult>(content);
         }
 
         /// <summary>
@@ -81,11 +107,15 @@ namespace PushNotifications.Client.Net
 
             const string resource = "Subscriptions/UnsubscribeFromTopic";
 
-            var request = CreateRestRequest(resource, Method.POST)
-                .AddJsonBody(topicSubscribeModel);
+            var requesBody = new StringContent(JsonConvert.SerializeObject(topicSubscribeModel), Encoding.UTF8, "application/json");
 
-            var response = CreateRestClient().ExecuteWithLog<ResponseResult>(request);
-            return ResponseResult.FromRestResponse(response);
+            var response = _httpClient.PostAsync(resource, requesBody).Result;
+
+            if (response.IsSuccessStatusCode == false)
+                return ResponseResult.Success;
+
+            string content = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            return JsonConvert.DeserializeObject<ResponseResult>(content);
         }
 
         public ResponseResult SubscribeForPushy(SubscriptionForPushy subscription)
@@ -94,24 +124,32 @@ namespace PushNotifications.Client.Net
 
             const string resource = "Subscriptions/PushySubscription/Subscribe";
 
-            var request = CreateRestRequest(resource, Method.POST)
-                .AddJsonBody(subscription);
+            var requesBody = new StringContent(JsonConvert.SerializeObject(subscription), Encoding.UTF8, "application/json");
 
-            var response = CreateRestClient().ExecuteWithLog<ResponseResult>(request);
-            return ResponseResult.FromRestResponse(response);
+            var response = _httpClient.PostAsync(resource, requesBody).Result;
+
+            if (response.IsSuccessStatusCode == false)
+                return ResponseResult.Success;
+
+            string content = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            return JsonConvert.DeserializeObject<ResponseResult>(content);
         }
 
-        public ResponseResult UnSubscribeForFireBase(SubscriptionForFireBase subscription, Authenticator authenticator = null)
+        public ResponseResult UnSubscribeForFireBase(SubscriptionForFireBase subscription)
         {
             if (subscription is null) throw new ArgumentNullException(nameof(subscription));
 
             const string resource = "Subscriptions/FireBaseSubscription/UnSubscribe";
 
-            var request = CreateRestRequest(resource, Method.POST)
-                .AddJsonBody(subscription);
+            var requesBody = new StringContent(JsonConvert.SerializeObject(subscription), Encoding.UTF8, "application/json");
 
-            var response = CreateRestClient().ExecuteWithLog<ResponseResult>(request);
-            return ResponseResult.FromRestResponse(response);
+            var response = _httpClient.PostAsync(resource, requesBody).Result;
+
+            if (response.IsSuccessStatusCode == false)
+                return ResponseResult.Success;
+
+            string content = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            return JsonConvert.DeserializeObject<ResponseResult>(content);
         }
 
         public ResponseResult UnSubscribeForPushy(SubscriptionForPushy subscription)
@@ -120,49 +158,59 @@ namespace PushNotifications.Client.Net
 
             const string resource = "Subscriptions/PushySubscription/UnSubscribe";
 
-            var request = CreateRestRequest(resource, Method.POST)
-                .AddJsonBody(subscription);
+            var requesBody = new StringContent(JsonConvert.SerializeObject(subscription), Encoding.UTF8, "application/json");
 
-            var response = CreateRestClient().ExecuteWithLog<ResponseResult>(request);
-            return ResponseResult.FromRestResponse(response);
+            var response = _httpClient.PostAsync(resource, requesBody).Result;
+
+            if (response.IsSuccessStatusCode == false)
+                return ResponseResult.Success;
+
+            string content = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            return JsonConvert.DeserializeObject<ResponseResult>(content);
         }
 
         public ResponseResult<SubscriberTokens> GetTopicSubscribedCount(TopicSubscriptionCountModel topicSubscriptionCountModel)
         {
             if (topicSubscriptionCountModel is null) throw new ArgumentNullException(nameof(topicSubscriptionCountModel));
 
-            const string resource = "TopicSubscriptionCount/GetTopicSubscribedCount";
+            string resource = $"TopicSubscriptionCount/GetTopicSubscribedCount?name={topicSubscriptionCountModel.Name}";
 
-            var request = CreateRestRequest(resource, Method.GET)
-                .AddQueryParameter("name", topicSubscriptionCountModel.Name);
+            var response = _httpClient.GetAsync(resource).GetAwaiter().GetResult();
 
-            var response = CreateRestClient().ExecuteWithLog<ResponseResult<SubscriberTokens>>(request);
-            return ResponseResult.FromRestResponse(response);
+            if (response.IsSuccessStatusCode == false)
+                return new ResponseResult<SubscriberTokens>(response.ReasonPhrase);
+
+            var content = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            return JsonConvert.DeserializeObject<ResponseResult<SubscriberTokens>>(content);
         }
 
         public ResponseResult<SubscriberTokens> GetSubscriberTokens(SubscriberTokensModel model)
         {
             if (model is null) throw new ArgumentNullException(nameof(model));
 
-            const string resource = "Subscriptions/SubscriberTokens";
+            string resource = $"Subscriptions/SubscriberTokens?SubscriberUrn={model.SubscriberUrn}";
 
-            var request = CreateRestRequest(resource, Method.GET)
-                .AddQueryParameter("SubscriberUrn", model.SubscriberUrn);
+            var response = _httpClient.GetAsync(resource).GetAwaiter().GetResult();
 
-            var response = CreateRestClient().ExecuteWithLog<ResponseResult<SubscriberTokens>>(request);
-            return ResponseResult.FromRestResponse(response);
+            if (response.IsSuccessStatusCode == false)
+                return new ResponseResult<SubscriberTokens>(response.ReasonPhrase);
+
+            var content = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            return JsonConvert.DeserializeObject<ResponseResult<SubscriberTokens>>(content);
         }
 
         public ResponseResult<DiscoveryReaderResponseModel> Discovery()
         {
             const string resource = "Discovery/Normalized";
 
-            var request = CreateRestRequest(resource, Method.GET);
 
-            var response = CreateRestClient().ExecuteWithLog<ResponseResult<DiscoveryReaderResponseModel>>(request);
-            return ResponseResult.FromRestResponse(response);
+            var response = _httpClient.GetAsync(resource).GetAwaiter().GetResult();
+
+            if (response.IsSuccessStatusCode == false)
+                return new ResponseResult<DiscoveryReaderResponseModel>(response.ReasonPhrase);
+
+            var content = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            return JsonConvert.DeserializeObject<ResponseResult<DiscoveryReaderResponseModel>>(content);
         }
     }
-
-
 }
