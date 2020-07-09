@@ -1,3 +1,8 @@
+#### 5.1.0-beta0005 - 09.07.2020
+* Removes RestSharp
+* Targets netcoreapp3.1
+* Adds a Playground project
+
 #### 5.1.0-beta0004 - 30.11.2018
 * Error logging
 
