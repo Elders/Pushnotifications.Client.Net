@@ -21,14 +21,7 @@ namespace PushNotifications.Client.Net
 
         public IEnumerable<string> Errors { get; set; }
 
-        public HttpStatusCode StatusCode { get; set; }
-
-        public bool IsSuccess { get { return HasNoErrors() && HttpCodeIsOk(); } }
-
-        private bool HttpCodeIsOk()
-        {
-            return StatusCode.Equals(HttpStatusCode.OK) || StatusCode.Equals(HttpStatusCode.Accepted) || StatusCode.Equals(HttpStatusCode.Created);
-        }
+        public bool IsSuccess { get { return HasNoErrors(); } }
 
         private bool HasNoErrors()
         {
