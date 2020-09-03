@@ -9,10 +9,12 @@ namespace PushNotifications.Client.Net
     public partial class PushNotificationsHttpClient
     {
         private readonly HttpClient _httpClient;
+        private readonly JsonSerializerSettings _jsonSerializerSettings;
 
         public PushNotificationsHttpClient(HttpClient httpClient)
         {
             _httpClient = httpClient;
+            _jsonSerializerSettings = new JsonSerializerSettings() { ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor };
         }
 
         public ResponseResult SendPushNotification(SendPushNotificationModel pushNotification)
@@ -29,7 +31,7 @@ namespace PushNotifications.Client.Net
                 return ResponseResult.Success;
 
             string content = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            return JsonConvert.DeserializeObject<ResponseResult>(content);
+            return JsonConvert.DeserializeObject<ResponseResult>(content, _jsonSerializerSettings);
         }
 
         /// <summary>
@@ -52,7 +54,7 @@ namespace PushNotifications.Client.Net
                 return ResponseResult.Success;
 
             string content = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            return JsonConvert.DeserializeObject<ResponseResult>(content);
+            return JsonConvert.DeserializeObject<ResponseResult>(content, _jsonSerializerSettings);
         }
 
         public ResponseResult SubscribeForFireBase(SubscriptionForFireBase subscription)
@@ -69,7 +71,7 @@ namespace PushNotifications.Client.Net
                 return ResponseResult.Success;
 
             string content = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            return JsonConvert.DeserializeObject<ResponseResult>(content);
+            return JsonConvert.DeserializeObject<ResponseResult>(content, _jsonSerializerSettings);
         }
 
         /// <summary>
@@ -92,7 +94,7 @@ namespace PushNotifications.Client.Net
                 return ResponseResult.Success;
 
             string content = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            return JsonConvert.DeserializeObject<ResponseResult>(content);
+            return JsonConvert.DeserializeObject<ResponseResult>(content, _jsonSerializerSettings);
         }
 
         /// <summary>
@@ -115,7 +117,7 @@ namespace PushNotifications.Client.Net
                 return ResponseResult.Success;
 
             string content = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            return JsonConvert.DeserializeObject<ResponseResult>(content);
+            return JsonConvert.DeserializeObject<ResponseResult>(content, _jsonSerializerSettings);
         }
 
         public ResponseResult SubscribeForPushy(SubscriptionForPushy subscription)
@@ -132,7 +134,7 @@ namespace PushNotifications.Client.Net
                 return ResponseResult.Success;
 
             string content = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            return JsonConvert.DeserializeObject<ResponseResult>(content);
+            return JsonConvert.DeserializeObject<ResponseResult>(content, _jsonSerializerSettings);
         }
 
         public ResponseResult UnSubscribeForFireBase(SubscriptionForFireBase subscription)
@@ -149,7 +151,7 @@ namespace PushNotifications.Client.Net
                 return ResponseResult.Success;
 
             string content = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            return JsonConvert.DeserializeObject<ResponseResult>(content);
+            return JsonConvert.DeserializeObject<ResponseResult>(content, _jsonSerializerSettings);
         }
 
         public ResponseResult UnSubscribeForPushy(SubscriptionForPushy subscription)
@@ -166,7 +168,7 @@ namespace PushNotifications.Client.Net
                 return ResponseResult.Success;
 
             string content = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            return JsonConvert.DeserializeObject<ResponseResult>(content);
+            return JsonConvert.DeserializeObject<ResponseResult>(content, _jsonSerializerSettings);
         }
 
         public ResponseResult<SubscriberTokens> GetTopicSubscribedCount(TopicSubscriptionCountModel topicSubscriptionCountModel)
@@ -181,7 +183,7 @@ namespace PushNotifications.Client.Net
                 return new ResponseResult<SubscriberTokens>(response.ReasonPhrase);
 
             var content = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            return JsonConvert.DeserializeObject<ResponseResult<SubscriberTokens>>(content);
+            return JsonConvert.DeserializeObject<ResponseResult<SubscriberTokens>>(content, _jsonSerializerSettings);
         }
 
         public ResponseResult<SubscriberTokens> GetSubscriberTokens(SubscriberTokensModel model)
@@ -196,7 +198,7 @@ namespace PushNotifications.Client.Net
                 return new ResponseResult<SubscriberTokens>(response.ReasonPhrase);
 
             var content = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            return JsonConvert.DeserializeObject<ResponseResult<SubscriberTokens>>(content);
+            return JsonConvert.DeserializeObject<ResponseResult<SubscriberTokens>>(content, _jsonSerializerSettings);
         }
 
         public ResponseResult<DiscoveryReaderResponseModel> Discovery()
@@ -210,7 +212,7 @@ namespace PushNotifications.Client.Net
                 return new ResponseResult<DiscoveryReaderResponseModel>(response.ReasonPhrase);
 
             var content = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            return JsonConvert.DeserializeObject<ResponseResult<DiscoveryReaderResponseModel>>(content);
+            return JsonConvert.DeserializeObject<ResponseResult<DiscoveryReaderResponseModel>>(content, _jsonSerializerSettings);
         }
     }
 }

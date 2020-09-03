@@ -19,7 +19,7 @@ namespace PushNotifications.Client.Net
             this.Errors = errors;
         }
 
-        public IEnumerable<string> Errors { get; private set; }
+        public IEnumerable<string> Errors { get; set; }
 
         public HttpStatusCode StatusCode { get; set; }
 
@@ -42,7 +42,7 @@ namespace PushNotifications.Client.Net
             BulkResult = new List<T>();
         }
 
-        public List<T> BulkResult { get; private set; }
+        public List<T> BulkResult { get; set; }
         public IEnumerable<string> Errors { get { return BulkResult.Where(x => x.Errors != null && x.Errors.Any()).SelectMany(x => x.Errors); } }
         public bool IsSuccess
         {
@@ -70,7 +70,7 @@ namespace PushNotifications.Client.Net
         }
         public ResponseResult(params string[] errors) : base(errors) { }
 
-        public T Result { get; private set; }
+        public T Result { get; set; }
     }
 
     static class ResponseResultExtensions
