@@ -1,3 +1,6 @@
+#### 5.1.0-beta0006 - 03.09.2020
+* Fixes Deserialization issues
+
 #### 5.1.0-beta0005 - 09.07.2020
 * Removes RestSharp
 * Targets netcoreapp3.1
