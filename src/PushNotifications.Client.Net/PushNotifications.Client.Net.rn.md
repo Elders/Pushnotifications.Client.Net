@@ -1,3 +1,6 @@
+#### 5.1.0-beta0008 - 04.09.2020
+* Fixes Deserialization for discovery
+
 #### 5.1.0-beta0007 - 03.09.2020
 * Removes StatusCode from ResponseResult
 
