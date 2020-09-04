@@ -7,15 +7,15 @@ namespace PushNotifications.Client.Net
     {
         DiscoverableEndpoint() { }
 
-        public DiscoverableEndpoint(string name, Uri uri, string boundedContext, DiscoveryVersion version)
+        public DiscoverableEndpoint(string name, Uri url, string boundedContext, DiscoveryVersion version)
         {
             if (string.IsNullOrEmpty(name) == true) throw new ArgumentNullException(nameof(name));
-            if (ReferenceEquals(null, uri) == true) throw new ArgumentNullException(nameof(uri));
+            if (ReferenceEquals(null, url) == true) throw new ArgumentNullException(nameof(url));
             if (string.IsNullOrEmpty(boundedContext) == true) throw new ArgumentNullException(nameof(boundedContext));
             if (ReferenceEquals(null, version) == true) throw new ArgumentNullException(nameof(version));
 
             Name = name;
-            Url = uri;
+            Url = url;
             BoundedContext = boundedContext;
             Version = version;
             FullName = $"{BoundedContext}-{Name}-{Version.IntroducedAtVersion}";

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace PushNotifications.Client.Net
@@ -18,8 +19,10 @@ namespace PushNotifications.Client.Net
 
         public DiscoveryVersion(string introducedAtVersion) : this(introducedAtVersion, string.Empty) { }
 
+        [JsonProperty("introducedAtVersion")]
         public string IntroducedAtVersion { get; private set; }
 
+        [JsonProperty("depricatedAtVersion")]
         public string DepricatedAtVersion { get; private set; }
 
         public override bool Equals(object obj)

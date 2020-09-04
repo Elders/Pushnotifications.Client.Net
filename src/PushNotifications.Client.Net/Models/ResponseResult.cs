@@ -28,6 +28,7 @@ namespace PushNotifications.Client.Net
             return Errors == null || !Errors.Any();
         }
     }
+
     public class BulkResponseResult<T> where T : ResponseResult
     {
         public BulkResponseResult()
@@ -61,6 +62,7 @@ namespace PushNotifications.Client.Net
         {
             Result = result;
         }
+
         public ResponseResult(params string[] errors) : base(errors) { }
 
         public T Result { get; set; }

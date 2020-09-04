@@ -14,7 +14,7 @@ namespace PushNotifications.Client.Net
         public PushNotificationsHttpClient(HttpClient httpClient)
         {
             _httpClient = httpClient;
-            _jsonSerializerSettings = new JsonSerializerSettings() { ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor };
+            _jsonSerializerSettings = new JsonSerializerSettings() { };
         }
 
         public ResponseResult SendPushNotification(SendPushNotificationModel pushNotification)
